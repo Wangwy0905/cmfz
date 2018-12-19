@@ -47,7 +47,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.8</version>
+            <version>5.1.25</version>
         </dependency>
         <!-- 给内嵌tomcat提供jsp解析功能的jar -->
         <dependency>
@@ -59,6 +59,12 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.yanzhengma</groupId>
+            <artifactId>yanzhengma</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
