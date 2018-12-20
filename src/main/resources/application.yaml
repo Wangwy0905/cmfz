@@ -3,7 +3,7 @@ server:
   context-path: /cmfz
   jsp-servlet:
     init-parameters:
-      develoment: true
+      development: true
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -17,4 +17,4 @@ spring:
       suffix: .jsp
 mybatis:
   type-aliases-package: com.baizhi.entity
-  mapper-locations: classpath:Mapper/MenuMapper.xml
+  mapper-locations: classpath:Mapper/*Mapper.xml

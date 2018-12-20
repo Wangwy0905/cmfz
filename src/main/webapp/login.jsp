@@ -51,8 +51,13 @@
                             $("#loginForm").form("validate");
                         },
                         success:function(data){
-                            if(data=="ok"){
+                            alert(data+"211111");
+                            if(data=='"ok"'){
+
                            		 location.href="${pageContext.request.contextPath}/main/main.jsp";
+							}else{
+                                alert(data+"1111")
+                                $("#span").text(data);
 							}
                         }
                     })
@@ -66,7 +71,7 @@
 	
 		<div class="login">
 			<form id="loginForm"  method="post" >
-				
+
 				<table>
 					<tbody>
 						<tr>
@@ -113,6 +118,7 @@
 						</td>
 					</tr>
 				</tbody></table>
+				<p id="span" align="center" style="color: red"></p>
 				<div class="powered">COPYRIGHT © 2008-2017.</div>
 				<div class="link">
 					<a href="http://www.chimingfowang.com/">持名佛网首页</a> |

@@ -7,24 +7,51 @@
 <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">   
 <link rel="stylesheet" type="text/css" href="../themes/IconExtension.css">   
 <script type="text/javascript" src="../js/jquery.min.js"></script>   
-<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>  
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	<!--菜单处理-->
     $(function(){
          $.get("${pageContext.request.contextPath}/menu/queryAll",
             function (result) {
-                for(var i=0;result.length;i++){
+             console.log(result[0].menuList);
+                //new
+                for(var i=0;i<result.length;i++){
+                    var second=result[i].menuList;
+
+                    var a="";
+
+                    for(var j=0;j<second.length;j++){
+
+                        a+="<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('"+second[j].title+"','"+second[j].iconcls+"','"+second[j].url+"')\" data-options=\"iconCls:'icon-search'\">"+second[j].title+"</a></p>";
+                    }
                     $("#aa").accordion("add",{
                         title:result[i].title,
                         //iconCls:result[i].iconcls,
-                        content:"1111",
+                        content:a,
                         selected:false
                     });
                 }
             },"json")
 
     });
+	function addTabs(title,iconcls,url){
+        var aa=$("#tt").tabs("exists",title);
+        if(aa==true){
+            $("#tt").tabs("select",title);
+        }else{
+            $("#tt").tabs("add",{
+               title:title,
+               iconCls:iconcls,
+               href:"${pageContext.request.contextPath}/main/banner.jsp" ,
+                selected: true,
+                closable:true
+
+            });
+        }
+    }
 </script>
 
 </head>
@@ -39,7 +66,8 @@
        
     <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
     	<div id="aa" class="easyui-accordion" data-options="fit:true">
-    		
+
+
 		</div>  
     </div>
 

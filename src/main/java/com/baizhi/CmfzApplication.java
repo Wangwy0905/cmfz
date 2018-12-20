@@ -6,6 +6,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("com.baizhi.Mapper")
+@org.mybatis.spring.annotation.MapperScan("com.baizhi.Mapper")
 public class CmfzApplication {
 
     public static void main(String[] args) {

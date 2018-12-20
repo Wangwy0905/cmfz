@@ -23,14 +23,19 @@ public class AdminController {
     AdminService adminService;
     @ResponseBody
     @RequestMapping("queryOne")
-    public String  queryOne(String name,String password){
+    public String  queryOne(String name,String password,String enCode,HttpSession session){
 
-        Admin admin=new Admin();
-        admin.setName(name);
-        admin.setPassword(password);
-
-        Admin admin1=adminService.queryOne(admin);
-        return "ok";
+      try{
+          Admin admin=new Admin();
+          admin.setName(name);
+          admin.setPassword(password);
+          Admin admin1=adminService.queryOne(admin,session,enCode);
+          return "ok";
+      }catch(Exception e){
+          e.printStackTrace();
+          String message=e.getMessage();
+          return message;
+      }
     }
 
     @RequestMapping("getCode")

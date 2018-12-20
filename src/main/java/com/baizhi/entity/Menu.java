@@ -21,6 +21,5 @@ public class Menu  {
     private  String iconcls;
     private  String url;
     private String parentId;
-    @Transient
     private List<Menu>  menuList;
 }
