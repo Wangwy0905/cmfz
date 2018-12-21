@@ -7,7 +7,7 @@
 
                     $("#bannerUpdate").linkbutton({
                         plain:true,
-
+                        iconCls:"icon-edit",
                         onClick: function(){
 
                             var row=$("#BannerTable").edatagrid("getSelected");
@@ -71,7 +71,7 @@
                     //保存
                     $("#bannerSave").linkbutton({
                         plain:true,
-
+                        iconCls:"icon-save",
 
                         onClick: function () {
 
@@ -84,7 +84,7 @@
                     //删除
                     $("#bannerDelete").linkbutton({
                         plain:true,
-
+                        iconCls:"icon-cancel",
                         onClick:function(){
 
                          var banner= $("#BannerTable").datagrid("getSelected");
@@ -93,6 +93,8 @@
                               "删除提示",
                               "确认删除吗？",
                             function(r){
+
+
                                   if(r==true){
                                       $.post("${pageContext.request.contextPath}/banner/delete2",
                                               "id="+banner.id,
@@ -133,16 +135,7 @@
                 }
         </script>
         <table id="BannerTable">
-         <%--   <thead>
-                <tr>
 
-                    <th data-options="field:'id',width:1">Id</th>
-                    <th data-options="field:'title',width:1">标题</th>
-                    <th data-options="field:'status',width:1,editor:{type:'text', options: {}},formatter:status">状态</th>
-                    <th data-options="field:'pubDate',width:1">上传时间</th>
-                    <th data-options="field:'descption'">详细描述</th>
-                </tr>
-            </thead>--%>
         </table>
         <div id="tb">
             <a id="bannerAdd">添加</a>

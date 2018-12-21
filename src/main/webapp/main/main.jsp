@@ -1,11 +1,11 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+﻿<%@ page  contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>持名法州主页</title>
-<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">   
-<link rel="stylesheet" type="text/css" href="../themes/IconExtension.css">   
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/themes/default/easyui.css"/>
+<link rel="stylesheet" type="text/css" href="../themes/IconExtension.css"/>
 <script type="text/javascript" src="../js/jquery.min.js"></script>   
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
@@ -25,7 +25,7 @@
 
                     for(var j=0;j<second.length;j++){
 
-                        a+="<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('"+second[j].title+"','"+second[j].iconcls+"','"+second[j].url+"')\" data-options=\"iconCls:'icon-search'\">"+second[j].title+"</a></p>";
+                        a+="<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('"+second[j].title+"','"+second[j].iconcls+"','"+second[j].url+"')\" data-options=\"iconCls:'icon-add'\">"+second[j].title+"</a></p>";
                     }
                     $("#aa").accordion("add",{
                         title:result[i].title,
