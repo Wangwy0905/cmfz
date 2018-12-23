@@ -64,7 +64,7 @@
                             width:300,
                             height:200
                         });
-                        $("#Bannerdialog").datagrid("reload");
+                        $("#BannerTable").datagrid("reload");
                         $("#Bannerdialog").dialog("close");
                     }
                 });

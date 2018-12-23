@@ -45,13 +45,14 @@
             $("#tt").tabs("add",{
                title:title,
                iconCls:iconcls,
-               href:"${pageContext.request.contextPath}/main/banner.jsp" ,
+               href:"${pageContext.request.contextPath}/"+url ,
                 selected: true,
                 closable:true
 
             });
         }
     }
+
 </script>
 
 </head>

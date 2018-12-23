@@ -4,10 +4,8 @@
 
 <script type="text/javascript">
     $(function(){
-
         //页面加载后  调load查一个
         $("#AlbumForm").form("load","${pageContext.request.contextPath}/album/queryOneAlbum?id="+row2);
-
 
         var path="${pageContext.request.contextPath}/"+row3;
         $("#AlbumCoverImg").prop("src",path);

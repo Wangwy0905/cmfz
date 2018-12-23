@@ -31,13 +31,7 @@
                         $("#AddAlbumForm").form("validate");
                     },
                     success:function(){
-                        $.messager.show({
-                            title:"系统提示",
-                            msg:"添加成功!",
-                            showType:"show",
-                            width:300,
-                            height:200
-                        });
+
                         $("#album").treegrid("reload");
                         $("#AlbumDialog2").dialog("close");
                     }

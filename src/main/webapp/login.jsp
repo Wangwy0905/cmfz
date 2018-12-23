@@ -51,7 +51,7 @@
                             $("#loginForm").form("validate");
                         },
                         success:function(data){
-                            alert(data+"211111");
+                            //alert(data+"211111");
                             if(data=='"ok"'){
 
                            		 location.href="${pageContext.request.contextPath}/main/main.jsp";

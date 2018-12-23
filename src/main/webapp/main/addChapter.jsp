@@ -8,9 +8,7 @@
         $("#ChapterSize").textbox({
             required:true
         });
-        $("#ChapterDuration").textbox({
-            required:true
-        });
+
         $("#AddChapterButton").linkbutton({
             plain:true,
             onClick:function(){
@@ -50,13 +48,7 @@
             </td>
         </tr>
 
-        <tr>
-            <td >
-                播音:
-            </td>
-            <td >
-                <input id="ChapterDuration"  name="duration"/>
-            </td>
+
         </tr>
             <tr>
             <td >

@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/themes/default/easyui.css"/>
-    <link rel="stylesheet" type="text/css" href="../themes/IconExtension.css"/>
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
-    <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
-    <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         var row2;
         var row3;
@@ -19,14 +9,18 @@
             text: "专辑详情",
             handler: function () {
                 var row = $("#album").treegrid("getSelected");
-                console.log(row);
-                if (! isNaN(row.id)) {
+
+                if (row==null) {
+                    $.messager.alert("警告","请先选中专辑");
+                }else if (! isNaN(row.id)) {
                     //获取指定行
-                    $("#AlbumDialog").dialog("open");
+                    console.log(row.id);
                     row2=row.id;
                     row3=row.coverImg;
-                } else {
-                        $.messager.alert("警告","请先选中专辑")
+                    $("#AlbumDialog").dialog("open");
+
+                } else{
+                    $.messager.alert("警告","请先选中专辑");
                 }
 
             }
@@ -56,7 +50,12 @@
             text: "音频下载",
             iconCls: 'icon-save',
             handler: function () {
-
+                var rowDownload = $("#album").treegrid("getSelected");
+                if(isNaN(rowDownload.id)&&rowDownload.id!=null){
+                    location.href="${pageContext.request.contextPath}/chapter/downLoad?name="+rowDownload.url;
+                }else{
+                    $.messager.alert("警告","请先选中章节");
+                }
             }
         }]
         $(function () {
@@ -81,6 +80,7 @@
                 width:800,
                 height:400,
                 closed:true,
+                cache:false,
                 href:'${pageContext.request.contextPath}/main/showAlbum.jsp'
             });
             $("#AlbumDialog2").dialog({
@@ -100,16 +100,16 @@
 
         })
         function kkUrl(value,row,index){
-            return "<audio controls='controls' src='${pageContext.request.contextPath}/"+value+"'/>";
+            if (isNaN(row.id)){
+                return "<audio controls='controls' src='${pageContext.request.contextPath}/video/"+value+"'/>";
+            }else{
+                return null;
+            }
         }
 
     </script>
-</head>
-<body>
 
 <table id="album"></table>
 <div id="AlbumDialog"></div>
 <div id="AlbumDialog2"></div>
 <div id="AlbumDialog3"></div>
-</body>
-</html>

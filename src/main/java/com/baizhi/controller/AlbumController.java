@@ -28,6 +28,7 @@ public class AlbumController {
     @RequestMapping("queryOneAlbum")
     public Album queryOneAlbum(Integer id){
         Album album= albumService.queryOneAlbum(id);
+        System.out.println(id);
         System.out.println(album+"========");
         return album;
     }
