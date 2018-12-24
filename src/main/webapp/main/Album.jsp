@@ -37,13 +37,17 @@
             handler: function () {
                 var rowChapter = $("#album").treegrid("getSelected");
                 //console.log(rowChapter.id);
-                if (! isNaN(rowChapter.id)) {
-                    //获取指定行
-                    chapterId=rowChapter.id;
-                    $("#AlbumDialog3").dialog("open");
+                if (rowChapter == null) {
+                    $.messager.alert("警告", "请先选中专辑");
+                }else{
+                    if (!isNaN(rowChapter.id)) {
+                        //获取指定行
+                        chapterId = rowChapter.id;
+                        $("#AlbumDialog3").dialog("open");
 
-                } else {
-                    $.messager.alert("警告","请先选中专辑");
+                    } else {
+                        $.messager.alert("警告", "请先选中专辑");
+                    }
                 }
             }
         }, '-', {
@@ -51,24 +55,32 @@
             iconCls: 'icon-save',
             handler: function () {
                 var rowDownload = $("#album").treegrid("getSelected");
-                if(isNaN(rowDownload.id)&&rowDownload.id!=null){
-                    location.href="${pageContext.request.contextPath}/chapter/downLoad?name="+rowDownload.url;
+                if(rowDownload==null){
+                    $.messager.alert("警告","请先选中章节");
+                }else if(isNaN(rowDownload.id)){
+                    location.href="${pageContext.request.contextPath}/chapter/downLoad?name="+rowDownload.url+"&title="+rowDownload.title;
+
                 }else{
                     $.messager.alert("警告","请先选中章节");
                 }
+
             }
         }]
         $(function () {
             $('#album').treegrid({
 
+                onDblClickRow:function(row){
+                    $("#audio_dialog").dialog("open")
+                    $("#audio_url").prop("src","${pageContext.request.contextPath}/video/"+row.url);
+                },
                 url:'${pageContext.request.contextPath}/album/queryAll',
                 idField:'id',
                 treeField:'title',
                 columns:[[
                     {field:'title',title:'名字',width:60},
-                    {field:'url',title:'下载路径',width:80,formatter:kkUrl},
+                    {field:'url',title:'下载路径',width:80},
                     {field:'size',title:'章节大小',width:80},
-                    {field:'duration',title:'章节时长(min)',width:80}
+                    {field:'duration',title:'章节时长(s)',width:80}
                 ]],
                 fit:true,
                 fitColumns:true,
@@ -84,28 +96,26 @@
                 href:'${pageContext.request.contextPath}/main/showAlbum.jsp'
             });
             $("#AlbumDialog2").dialog({
-                title:"专辑信息框",
+                title:"专辑添加框",
                 width:800,
                 height:400,
                 closed:true,
                 href:'${pageContext.request.contextPath}/main/addAlbum.jsp'
             });
             $("#AlbumDialog3").dialog({
-                title:"专辑信息框",
+                title:"播放栏",
                 width:800,
                 height:400,
                 closed:true,
                 href:'${pageContext.request.contextPath}/main/addChapter.jsp'
             });
 
+
+
+
         })
-        function kkUrl(value,row,index){
-            if (isNaN(row.id)){
-                return "<audio controls='controls' src='${pageContext.request.contextPath}/video/"+value+"'/>";
-            }else{
-                return null;
-            }
-        }
+
+
 
     </script>
 
@@ -113,3 +123,10 @@
 <div id="AlbumDialog"></div>
 <div id="AlbumDialog2"></div>
 <div id="AlbumDialog3"></div>
+
+<div id="audio_dialog" class="easyui-dialog" title="双击播放" style="width:400px;height:200px;"
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <audio id="audio_url" src="" controls="controls" autoplay="autoplay">
+
+    </audio>
+</div>

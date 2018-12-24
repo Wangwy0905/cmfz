@@ -1,15 +1,13 @@
 package com.baizhi.controller;
 
+import com.baizhi.entity.Album;
 import com.baizhi.entity.Chapter;
+import com.baizhi.mapper.AlbumMapper;
 import com.baizhi.service.ChapterService;
-
+import org.apache.commons.io.FilenameUtils;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.mp3.MP3AudioHeader;
 import org.jaudiotagger.audio.mp3.MP3File;
-import org.jaudiotagger.tag.TagException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.util.FileCopyUtils;
@@ -33,8 +31,10 @@ import java.util.UUID;
 public class ChapterController {
     @Autowired
     ChapterService chapterService;
+    @Autowired
+    AlbumMapper albumMapper;
     @RequestMapping("insertChapter")
-    public void insertChapter(Chapter chapter, MultipartFile file, HttpSession session,Integer albumId) throws IOException, TagException, ReadOnlyFileException, CannotReadException, InvalidAudioFrameException {
+    public void insertChapter(Chapter chapter, MultipartFile file, HttpSession session,Integer albumId) throws Exception {
         //System.out.println(chapter+"=======");
         //数字格式转换（保留小数前两位）
         DecimalFormat df   = new DecimalFormat("#0.00");
@@ -47,38 +47,64 @@ public class ChapterController {
 
 
         String newFile=file.getOriginalFilename();
-        File upFile=new File(realpath+"/"+newFile);
+        //重命名  得到文件名的后缀  MP3
+        String extension = FilenameUtils.getExtension(newFile);
+        String newFile1=UUID.randomUUID().toString();
+        newFile1 =newFile1+"."+extension;
+
+        File upFile=new File(realpath+"/"+newFile1);
+
+
+        try {
+            file.transferTo(upFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //获取MP3文件的时长
         MP3File mp3File= (MP3File) AudioFileIO.read(upFile);
         MP3AudioHeader mp3AudioHeader=mp3File.getMP3AudioHeader();
         String Mp3Length=String.valueOf(mp3AudioHeader.getTrackLength());
 
-
-        file.transferTo(upFile);
         String filePath=newFile;
         String uuid = UUID.randomUUID().toString();
         String realuuid=uuid.replaceAll("-", "");
         chapter.setId(realuuid);
         chapter.setAlbumId(albumId);
-        chapter.setUrl(filePath);
+        chapter.setUrl(newFile1);
         chapter.setDuration(Mp3Length);
 
         chapter.setUploadDate(new Date());
 
+        //更改专辑的集数
+        Integer albumId1 = chapter.getAlbumId();
+        Album album=albumMapper.selectByPrimaryKey(albumId1);
+
+        album.setCount(album.getCount()+1);
+        albumMapper.updateByPrimaryKey(album);
+
         chapterService.insertChapter(chapter);
+
+
 
     }
     @RequestMapping("downLoad")
-    public void downLoad(String name, HttpServletResponse response,HttpSession session) throws IOException {
+    public void downLoad(String name,String title,HttpServletResponse response,HttpSession session) throws IOException {
             ServletContext ctx=session.getServletContext();
             String realPath=ctx.getRealPath("video");
-             // String path=realPath.replaceAll("\\video","");
 
             File sFile=new File(realPath+"/"+name);
-            byte[] bs= FileCopyUtils.copyToByteArray(sFile);
+            //重命名
+             String extension = FilenameUtils.getExtension(name);
+
+             String chapterTitle=title+"."+extension;
+
+             byte[] bs= FileCopyUtils.copyToByteArray(sFile);
 
             //设置响应头
-            response.setHeader("content-disposition","attachment;filename="+ URLEncoder.encode(name,"utf-8"));
+            response.setHeader("content-disposition","attachment;filename="+ URLEncoder.encode(chapterTitle,"utf-8"));
+
+            response.setContentType("audio/mpeg");
             //获取输出流  输出文件内容
             ServletOutputStream out=null;
             try{
