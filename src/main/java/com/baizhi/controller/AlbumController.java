@@ -42,7 +42,7 @@ public class AlbumController {
         File upFile=new File(realpath+"/"+newFile);
 
         file.transferTo(upFile);
-        String filePath="/audioCollection/"+newFile;
+        String filePath=newFile;
         album.setCoverImg(filePath);
         album.setPubDate(new Date());
 

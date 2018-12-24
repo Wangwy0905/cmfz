@@ -80,18 +80,23 @@
             <td>标题</td>
             <td><input id="bannerTitleInput" name="title"/></td>
         </tr>
-        <tr>
-            <td>状态</td>
-            <td><input id="bannerStatusInput" name="status"/></td>
-        </tr>
+
         <tr>
             <td>描述</td>
             <td><input id="bannerDescriptionInput" name="descption"/></td>
         </tr>
         <tr>
+            <td>状态</td>
+            <td><%--<input id="bannerStatusInput" name="status"/>--%>
+                <input type="radio" name="status" value="1" />是
+                <input type="radio" name="status" value="0"/>否
+            </td>
+        </tr>
+        <tr>
             <td>图片</td>
             <td><input type="file" name="file"/></td>
         </tr>
+
     </table>
 </form>
 <a id="addBannerSubmitBtn"></a>

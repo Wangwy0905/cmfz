@@ -34,7 +34,7 @@
                         toolbar:tb,
                         view: detailview,
                         columns: [[
-                            {field: 'id', title: 'Id', width: 100},
+
                             {field: 'title', title: '标题', width: 100},
                             {
                                 field: 'status', title: '状态', width: 100, editor: {
@@ -42,7 +42,7 @@
                                     options: {required:true}
                                 },formatter:status
                             },
-                            {field: 'pubDate', title: '时间', width: 100, align: 'right'},
+                            {field: 'pubDate', title: '时间', width: 100},
                             {field: 'descption', title: '详细描述'}
                         ]],
                         detailFormatter: function (rowIndex, rowData) {
@@ -71,7 +71,7 @@
                     //保存
                     $("#bannerSave").linkbutton({
                         plain:true,
-                        iconCls:"icon-save",
+                        iconCls:"icon-add",
 
                         onClick: function () {
 

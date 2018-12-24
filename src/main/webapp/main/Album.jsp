@@ -33,7 +33,7 @@
             }
         }, '-', {
             text: "添加音频",
-            iconCls: 'icon-remove',
+            iconCls:"icon-add",
             handler: function () {
                 var rowChapter = $("#album").treegrid("getSelected");
                 //console.log(rowChapter.id);
@@ -52,7 +52,7 @@
             }
         }, '-', {
             text: "音频下载",
-            iconCls: 'icon-save',
+            iconCls: 'icon-edit',
             handler: function () {
                 var rowDownload = $("#album").treegrid("getSelected");
                 if(rowDownload==null){
@@ -63,15 +63,27 @@
                 }else{
                     $.messager.alert("警告","请先选中章节");
                 }
-
             }
+
+            }, '-' ,{
+                text:"专辑导出",
+                iconCls: 'icon-edit',
+                handler: function () {
+
+                    location.href="${pageContext.request.contextPath}/export/exportAlbum";
+            }
+
         }]
         $(function () {
             $('#album').treegrid({
 
                 onDblClickRow:function(row){
-                    $("#audio_dialog").dialog("open")
-                    $("#audio_url").prop("src","${pageContext.request.contextPath}/video/"+row.url);
+                  if(isNaN(row.id)){
+                      $("#audio_dialog").dialog("open")
+                      $("#audio_url").prop("src","${pageContext.request.contextPath}/video/"+row.url);
+                  }else{
+                      $.messager.alert("警告","请双击章节播放");
+                  }
                 },
                 url:'${pageContext.request.contextPath}/album/queryAll',
                 idField:'id',

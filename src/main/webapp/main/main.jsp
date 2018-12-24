@@ -29,7 +29,7 @@
                     }
                     $("#aa").accordion("add",{
                         title:result[i].title,
-                        //iconCls:result[i].iconcls,
+                        iconCls:result[i].iconcls,
                         content:a,
                         selected:false
                     });
