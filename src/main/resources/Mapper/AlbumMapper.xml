@@ -28,4 +28,16 @@
                c.id cid,c.title ctitle,c.size csize,c.duration cduration,c.url curl,c.upload_date cuploadDate,c.album_id calbumId from album a left join chapter c on
                a.id=c.album_id
     </select>
+
+    <!--分页查询 先分页再表连接-->
+    <select id="queryAlbumByPage" resultMap="res1">
+        select a.id id,a.title title,a.count count,a.cover_img coverImg,a.score score,a.author author,a.broadcast broadcast,a.brief brief,a.pub_date pubDate,
+        c.id cid,c.title ctitle,c.size csize,c.duration cduration,c.url curl,c.upload_date cuploadDate,c.album_id calbumId from
+        (select  id,title, count,cover_img,score,author,broadcast,brief,pub_date FROM album  limit ${(page-1)*rows},${rows}) a  left join chapter c on a.id=c.album_id
+
+    </select>
+
+    <select id="queryNum" resultType="java.lang.Integer">
+        select count(*) from album
+    </select>
 </mapper>

@@ -11,6 +11,9 @@
     <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
     <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script src="../echarts.min.js"></script>
+
+    <script src="../china.js"></script>
 <script type="text/javascript">
 	<!--菜单处理-->
     $(function(){
@@ -38,8 +41,9 @@
 
     });
 	function addTabs(title,iconcls,url){
-        var aa=$("#tt").tabs("exists",title);
-        if(aa==true){
+	    console.log(title);
+
+        if( $("#tt").tabs("exists",title)){
             $("#tt").tabs("select",title);
         }else{
             $("#tt").tabs("add",{

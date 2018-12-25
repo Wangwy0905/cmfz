@@ -85,7 +85,10 @@
                       $.messager.alert("警告","请双击章节播放");
                   }
                 },
-                url:'${pageContext.request.contextPath}/album/queryAll',
+                url:'${pageContext.request.contextPath}/album/queryAlbumDto',
+                pagination:true,
+                pageSize:3,
+                pageList:[1,3,5,7,9],
                 idField:'id',
                 treeField:'title',
                 columns:[[

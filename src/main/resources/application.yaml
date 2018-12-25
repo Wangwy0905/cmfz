@@ -15,6 +15,13 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
 mybatis:
   type-aliases-package: com.baizhi.entity
   mapper-locations: classpath:Mapper/*Mapper.xml

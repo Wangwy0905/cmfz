@@ -21,7 +21,7 @@ public class Chapter implements Serializable {
     @Id
     @ExcelIgnore
     private String  id;
-    @Excel(name="章节名")
+    @Excel(name="章节名" ,width=40)
     private String title;
     @Excel(name="章节大小")
     private String size;
