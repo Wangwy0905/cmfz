@@ -8,9 +8,12 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 public interface UserMapper extends Mapper<User> {
-    public Integer totalNum();
-    public Integer totalNum2();
-    public Integer totalNum3();
-    public List<UserDto> query ();
-    public List<User> queryAllUser();
+    Integer totalNum();
+    Integer totalNum2();
+    Integer totalNum3();
+    List<UserDto> query();
+    List<User> queryAllUser();
+
+
+
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +20,7 @@ import java.util.Date;
 @Table(name="user")
 @ExcelTarget(value="user")
 public class User  implements Serializable {
+    @Id
     @ExcelIgnore
     private  Integer id;
     @Excel(name="账号",width = 20)
@@ -48,4 +50,6 @@ public class User  implements Serializable {
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")
     private Date regDate;
+    @ExcelIgnore
+    private  Integer guruId;
 }

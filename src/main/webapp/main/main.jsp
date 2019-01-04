@@ -14,6 +14,11 @@
     <script src="../echarts.min.js"></script>
 
     <script src="../china.js"></script>
+
+
+    <script type="text/javascript" src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
+
+
 <script type="text/javascript">
 	<!--菜单处理-->
     $(function(){

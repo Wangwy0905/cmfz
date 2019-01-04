@@ -25,14 +25,38 @@
             data: ['近一周', '近两周','近三周']
         },
         yAxis: {}
-    }
+    };
     myChart.setOption(option);
     $.ajax({
 
         url: "${pageContext.request.contextPath}/user/totalNum",
         dataType: "JSON",
         success: function (data) {
-            console.log(data)
+
+            myChart.setOption({
+                series: [{
+                    name: '用户活跃度',
+                    data: data,
+                    type:"bar"
+                }]
+            })
+
+        }
+    });
+
+
+
+    var goEasy = new GoEasy({
+
+        appkey: "BC-ed05bee3bbf2424a8b7aba1b41673fe4"
+    });
+    goEasy.subscribe({
+        channel: "cmfz",
+        //channel: "用户活跃度",
+        onMessage: function (message) {
+
+            var data=eval(message.content);
+            alert(data);
             myChart.setOption({
                 series: [{
                     name: '用户活跃度',
@@ -41,7 +65,8 @@
                 }]
             })
         }
-    })
+    });
+
 
 </script>
 

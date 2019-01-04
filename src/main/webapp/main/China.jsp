@@ -26,7 +26,7 @@
         },
         visualMap: {
             min: 0,
-            max: 2500,
+            max: 15,
             left: 'left',
             top: 'bottom',
             text:['高','低'],           // 文本，默认为数值文本
@@ -46,14 +46,14 @@
         }
 
     };
-    myChart.setOption(option)
+    myChart.setOption(option);
 
     $.ajax({
 
         url: "${pageContext.request.contextPath}/user/query",
         dataType: "JSON",
         success: function (data) {
-            console.log(data.data)
+            console.log(data.data);
             myChart.setOption({
                 series : [
                     {
@@ -75,5 +75,43 @@
                 ]
             })
         }
-    })
+    });
+
+    var goEasy = new GoEasy({
+
+        appkey: "BC-ed05bee3bbf2424a8b7aba1b41673fe4"
+    });
+    goEasy.subscribe({
+        channel: "cmfz2",
+        onMessage: function (message) {
+
+
+            var data2 = eval("("+message.content+")");
+
+            myChart.setOption({
+                series : [
+                    {
+                        name: '用户数量',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data: data2.data
+                    }
+
+                ]
+            })
+
+        }
+
+    });
+
+
 </script>

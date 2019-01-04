@@ -18,7 +18,7 @@ public class ImportController {
            params.setHeadRows(1);
 
            List<User> users = ExcelImportUtil.importExcel(new File("E:/用户表.xls"), User.class, params);
-        System.out.println(users);
+           System.out.println(users);
 
        }
 }
