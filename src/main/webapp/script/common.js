@@ -62,7 +62,7 @@ function removeCookie(name, options) {
 			$message.hide();
 		}, 3000);
 		return $message;
-	}
+	};
 	// 对话框
 	$.dialog = function(options) {
 		var settings = {
@@ -201,7 +201,7 @@ function removeCookie(name, options) {
 			}
 		}
 		return $dialog;
-	}
+	};
 	// 文件浏览
 	$.fn.extend({
 		browser: function(options) {

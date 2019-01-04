@@ -73,13 +73,13 @@
                     location.href="${pageContext.request.contextPath}/export/exportAlbum";
             }
 
-        }]
+        }];
         $(function () {
             $('#album').treegrid({
 
                 onDblClickRow:function(row){
                   if(isNaN(row.id)){
-                      $("#audio_dialog").dialog("open")
+                      $("#audio_dialog").dialog("open");
                       $("#audio_url").prop("src","${pageContext.request.contextPath}/video/"+row.url);
                   }else{
                       $.messager.alert("警告","请双击章节播放");

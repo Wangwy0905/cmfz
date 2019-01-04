@@ -8,9 +8,9 @@ import com.baizhi.entity.Dto;
 import java.util.List;
 
 public interface BannerService {
-    public List<Banner> queryAll();
-    public Dto queryDto(int rows,int page);
-    public void insert(Banner banner);
-    public void delete2(Integer id);
-    public void updateBanner(Banner banner);
+    List<Banner> queryAll();
+    Dto queryDto(int rows, int page);
+    void insert(Banner banner);
+    void delete2(Integer id);
+    void updateBanner(Banner banner);
 }

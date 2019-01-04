@@ -10,6 +10,6 @@ import javax.servlet.http.HttpSession;
 
 public interface AdminService {
 
-    public Admin queryOne(Admin admin, HttpSession session,String encode);
+    Admin queryOne(Admin admin, HttpSession session, String encode);
 
 }

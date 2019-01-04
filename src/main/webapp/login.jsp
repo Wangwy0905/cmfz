@@ -56,7 +56,7 @@
 
                            		 location.href="${pageContext.request.contextPath}/main/main.jsp";
 							}else{
-                                alert(data+"1111")
+                                alert(data+"1111");
                                 $("#span").text(data);
 							}
                         }

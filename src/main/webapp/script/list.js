@@ -210,7 +210,7 @@ $().ready( function() {
 		$pageNumber.val(pageNumber);
 		$listForm.submit();
 		return false;
-	}
+	};
 	
 	// 列表查询
 	if (location.search != "") {

@@ -17,7 +17,8 @@ public class ValidateImageCodeUtils {
      */
     public enum SecurityCodeLevel {
         Simple, Medium, Hard
-    };
+    }
+
     /**
      * 产生默认验证码，4位中等难度
      *
