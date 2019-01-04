@@ -125,6 +125,7 @@ public class UserServiceImpl implements  UserService {
         errorDto.setErrMsg("用户信息拉取失败");
         user.setId(uid);
         if(uid==null){
+
             return errorDto;
         }else{
             userMapper.updateByPrimaryKeySelective(user);
