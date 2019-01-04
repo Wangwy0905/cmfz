@@ -164,19 +164,20 @@
 
                         var ll="http://192.168.198.135/"+result[i].url;
                         //console.log(ll);
-                        var td1=$("<td></td>").text(result[i].id);
-                        var td2=$("<td></td>").text(result[i].name);
-                        var td3=$("<td></td>").text(result[i].price);
-                        var td4=$("<td></td>").html(result[i].desc);
-                        var td5=$("<td></td>").html("<img src='"+ll+"'/>");
-                        var td6=$("<td></td>").text(result[i].pubDate);
-                        var td7=$("<td></td>").text(result[i].status);
-                        var td8=$("<td></td>").text(result[i].address);
-                        var tr=$("<tr></tr>");
+                       // var td1=$("<tr><td></td></tr>").text(result[i].id);
+                        var td2=$("<tr><td></td></tr>").html(result[i].name);
+                        var td3=$("<tr><td></td></tr>").text(result[i].price);
+                        var td4=$("<tr><td></td></tr>").html(result[i].desc);
+                        var td5=$("<tr><td></td></tr>").html("<img src='"+ll+"'/>");
+                        var td6=$("<tr><td></td></tr>").text(result[i].pubDate);
+                        var td7=$("<tr><td></td></tr>").text(result[i].status);
+                        var td8=$("<tr><td></td></tr>").text(result[i].address);
+                        var td9=$("<tr><td></td></tr>").text("--------------------");
+                        //var tr=$("<tr></tr>");
                        // console.log(result[i].name);
-                        tr.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8);
+                        $("#tbody").append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9);
 
-                        $("#tbody").append(tr);
+                        //$.append(tr);
                     }
                 }
             )

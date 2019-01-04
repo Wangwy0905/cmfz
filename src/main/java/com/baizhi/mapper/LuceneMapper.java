@@ -5,11 +5,13 @@ import com.baizhi.entity.Product;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.highlight.*;
 
 
 import org.apache.lucene.search.highlight.Scorer;
+import org.apache.lucene.util.Version;
 import org.apache.poi.ss.formula.functions.T;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
@@ -39,7 +41,15 @@ public class LuceneMapper {
 
 
     public   Highlighter  queryqq(String params){
-        Query query=new TermQuery(new Term("desc",params));
+        //Query query=new TermQuery(new Term("desc",params));
+        String[] strs={"name","desc","address"};
+        MultiFieldQueryParser multiFieldQueryParser=new MultiFieldQueryParser(Version.LUCENE_44,strs, new IKAnalyzer());
+        Query query= null;
+        try {
+            query = multiFieldQueryParser.parse(params);
+        } catch (org.apache.lucene.queryparser.classic.ParseException e) {
+            e.printStackTrace();
+        }
         Formatter formatter = new SimpleHTMLFormatter("<font color='red'>", "</font>");
         Scorer scorer=new QueryScorer(query);
         Highlighter highlighter = new Highlighter(formatter, scorer);
@@ -92,14 +102,16 @@ public class LuceneMapper {
         Product product = new Product();
         Highlighter highlighter=queryqq(params);
         String bestFragment=null;
+        String bestFragment1=null;
         try {
+            bestFragment1=highlighter.getBestFragment(new IKAnalyzer(), "name", document.get("name"));
             bestFragment = highlighter.getBestFragment(new IKAnalyzer(), "desc", document.get("desc"));
             System.out.println("11111"+bestFragment);
         } catch (Exception e) {
             e.printStackTrace();
         }
         product.setId(document.get("id"));
-        product.setName(document.get("name"));
+        product.setName(bestFragment1);
         product.setPrice(Double.valueOf(document.get("price")));
         product.setDesc(bestFragment);
         product.setUrl(document.get("url"));
