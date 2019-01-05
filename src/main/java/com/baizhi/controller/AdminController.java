@@ -3,6 +3,10 @@ package com.baizhi.controller;
 import com.baizhi.conf.ValidateImageCodeUtils;
 import com.baizhi.entity.Admin;
 import com.baizhi.service.AdminService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +29,17 @@ public class AdminController {
     @RequestMapping("queryOne")
     public String  queryOne(String name,String password,String enCode,HttpSession session){
 
-      try{
-          Admin admin=new Admin();
-          admin.setName(name);
-          admin.setPassword(password);
-          Admin admin1=adminService.queryOne(admin,session,enCode);
-          return "ok";
-      }catch(Exception e){
-          e.printStackTrace();
-          String message=e.getMessage();
-          return message;
-      }
+          try{
+              adminService.queryOne(name,password,session,enCode);
+              return "ok";
+
+          }catch(UnknownAccountException e){
+              return "账号错误,请重新输入";
+          }catch(IncorrectCredentialsException e){
+              return "密码错误，请重新输入";
+          }catch(Exception e){
+              return "验证码输入错误，请重新输入";
+          }
     }
 
     @RequestMapping("getCode")
@@ -60,5 +64,14 @@ public class AdminController {
             }
         }
             return null;
+    }
+
+    //退出系统
+
+    @RequestMapping("logoutAdmin")
+    public String logoutUser() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "login";
     }
 }

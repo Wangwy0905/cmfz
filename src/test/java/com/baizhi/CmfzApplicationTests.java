@@ -6,6 +6,7 @@ import com.baizhi.mapper.AlbumMapper;
 import com.baizhi.mapper.BannerMapper;
 import com.baizhi.service.AdminService;
 import com.baizhi.service.BannerService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,16 @@ public class CmfzApplicationTests {
             System.out.println(uuid);
         }
     }
-    @Test
+    /*@Test
     public void test2(){
         List<Album> albumList = albumMapper.queryAll();
         System.out.println(albumList+"111111111111");
+    }*/
+    @Test
+    public  void Test3(){
+        Md5Hash md5Hash=new Md5Hash("111111","abcd",1024);
+        String s = md5Hash.toHex();
+        System.out.println(s);
     }
 
 }

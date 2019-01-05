@@ -1,4 +1,5 @@
 <%@page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; UTF-8" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>持名法州后台管理中心</title>
@@ -51,12 +52,12 @@
                             $("#loginForm").form("validate");
                         },
                         success:function(data){
-                            //alert(data+"211111");
+
                             if(data=='"ok"'){
 
                            		 location.href="${pageContext.request.contextPath}/main/main.jsp";
 							}else{
-                                alert(data+"1111");
+
                                 $("#span").text(data);
 							}
                         }
