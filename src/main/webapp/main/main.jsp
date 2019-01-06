@@ -24,27 +24,52 @@
 <script type="text/javascript">
 	<!--菜单处理-->
     $(function(){
+
          $.get("${pageContext.request.contextPath}/menu/queryAll",
             function (result) {
-             console.log(result[0].menuList);
-                //new
-                for(var i=0;i<result.length;i++){
-                    var second=result[i].menuList;
+                for(var i=0;i<result.length;i++) {
 
-                    var a="";
+                    var second = result[i].menuList;
 
-                    for(var j=0;j<second.length;j++){
+                    var a = "";
+                        for (var j = 0; j < second.length; j++) {
+                            if(second[j].title=="用户活跃度"){
+                                <shiro:hasPermission name="user:d">
+                                    a += "<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second[j].title + "','" + second[j].iconcls + "','" + second[j].url + "')\" data-options=\"iconCls:'icon-add'\">" + second[j].title + "</a></p>";
+                                </shiro:hasPermission>
+                            }else if(second[j].title=="用户分布图"){
+                                <shiro:hasPermission name="user:d">
+                                    a += "<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second[j].title + "','" + second[j].iconcls + "','" + second[j].url + "')\" data-options=\"iconCls:'icon-add'\">" + second[j].title + "</a></p>";
+                                </shiro:hasPermission>
+                            }else{
+                                a += "<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second[j].title + "','" + second[j].iconcls + "','" + second[j].url + "')\" data-options=\"iconCls:'icon-add'\">" + second[j].title + "</a></p>";
 
-                        a+="<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('"+second[j].title+"','"+second[j].iconcls+"','"+second[j].url+"')\" data-options=\"iconCls:'icon-add'\">"+second[j].title+"</a></p>";
+                            }
+
+                        }
+
+                        if(result[i].title =="用户模块") {
+                            <shiro:hasRole name="super">
+                            $("#aa").accordion("add", {
+                                title: result[i].title,
+                                iconCls: result[i].iconcls,
+                                content: a,
+                                selected: false
+                            });
+                            </shiro:hasRole>
+                        }else{
+                            $("#aa").accordion("add", {
+                                title: result[i].title,
+                                iconCls: result[i].iconcls,
+                                content: a,
+                                selected: false
+                            });
+                        }
+
                     }
-                    $("#aa").accordion("add",{
-                        title:result[i].title,
-                        iconCls:result[i].iconcls,
-                        content:a,
-                        selected:false
-                    });
-                }
+
             },"json")
+
 
     });
 	function addTabs(title,iconcls,url){

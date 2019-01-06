@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
-
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <script type="text/javascript">
      var toolbar=[{
          iconCls:"icon-edit",

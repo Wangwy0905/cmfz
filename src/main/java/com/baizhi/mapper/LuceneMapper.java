@@ -111,9 +111,17 @@ public class LuceneMapper {
             e.printStackTrace();
         }
         product.setId(document.get("id"));
-        product.setName(bestFragment1);
+        if(document.get("name").contains(params)){
+            product.setName(bestFragment1 );
+        }else{
+            product.setName(document.get("name"));
+        }
         product.setPrice(Double.valueOf(document.get("price")));
-        product.setDesc(bestFragment);
+        if(document.get("desc").contains(params)){
+            product.setDesc(bestFragment);
+        }else{
+            product.setDesc(document.get("desc"));
+        }
         product.setUrl(document.get("url"));
         product.setStatus(document.get("status"));
         SimpleDateFormat format=new SimpleDateFormat();
