@@ -9,5 +9,6 @@ import java.util.List;
 public interface ArticleMapper extends Mapper<Article> {
     List<Article> queryAllArticle();
     List<Article> queryByNo(Integer guruId);
+    Integer queryCount();
 }
 

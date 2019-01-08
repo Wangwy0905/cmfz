@@ -69,9 +69,10 @@ public class AdminController {
     //退出系统
 
     @RequestMapping("logoutAdmin")
-    public String logoutUser() {
+    @ResponseBody
+    public void logoutUser() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "login";
+
     }
 }

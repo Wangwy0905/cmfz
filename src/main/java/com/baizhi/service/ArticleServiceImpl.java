@@ -2,6 +2,7 @@ package com.baizhi.service;
 
 
 import com.baizhi.entity.Article;
+import com.baizhi.entity.ArticleDto;
 import com.baizhi.mapper.ArticleMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,15 @@ public class ArticleServiceImpl implements  ArticleService {
     public List<Article> queryByNo(Integer guruId){
        List<Article> list= articleMapper.queryByNo(guruId);
        return list;
+    }
+
+    @Override
+    public ArticleDto queryDto() {
+        ArticleDto articleDto=new ArticleDto();
+        articleDto.setRows(articleMapper.queryAllArticle());
+        articleDto.setTotal(articleMapper.queryCount());
+
+        return articleDto;
     }
 
 }

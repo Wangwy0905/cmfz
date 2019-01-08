@@ -28,13 +28,16 @@ public class LuceneMapper {
     public void createIndex(Product product) {
         IndexWriter indexWriter= LuceneUtil.getIndexWriter();
 
-        Document docFromPro = getDocFromPro(product);
-       // System.out.println(docFromPro+"==========");
+        Document docFromPro =getDocFromPro(product);
+
         try {
             indexWriter.addDocument(docFromPro);
+
             LuceneUtil.commit(indexWriter);
-        } catch (IOException e) {
+        } catch  (IOException e) {
+
             e.printStackTrace();
+
             LuceneUtil.rollback(indexWriter);
         }
     }
@@ -65,7 +68,7 @@ public class LuceneMapper {
 
             TopDocs topDocs=indexSearcher.search(new TermQuery(new Term("desc",params)),100);
             ScoreDoc[] scoreDocs = topDocs.scoreDocs;
-            System.out.println(scoreDocs);
+           // System.out.println(scoreDocs);
             list=new ArrayList<>();
             for (int i = 0; i < scoreDocs.length; i++) {
                 ScoreDoc scoreDoc = scoreDocs[i];
@@ -106,7 +109,7 @@ public class LuceneMapper {
         try {
             bestFragment1=highlighter.getBestFragment(new IKAnalyzer(), "name", document.get("name"));
             bestFragment = highlighter.getBestFragment(new IKAnalyzer(), "desc", document.get("desc"));
-            System.out.println("11111"+bestFragment);
+            //System.out.println("11111"+bestFragment);
         } catch (Exception e) {
             e.printStackTrace();
         }

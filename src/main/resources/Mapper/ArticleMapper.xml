@@ -27,5 +27,8 @@
     <select id="queryByNo" resultType="Article">
         select id,title,insert_img,content,pub_date,guru_id from article  where guru_id !=#{guruId}
     </select>
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(*) from article
+    </select>
 </mapper>
 

@@ -5,8 +5,6 @@
     <!-- 引入 ECharts 文件 -->
 
 
-
-
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 <div id="main2" style="width: 600px;height:400px;"></div>
 <script type="text/javascript">
@@ -56,7 +54,7 @@
         onMessage: function (message) {
 
             var data=eval(message.content);
-            alert(data);
+            // alert(data);
             myChart.setOption({
                 series: [{
                     name: '用户活跃度',

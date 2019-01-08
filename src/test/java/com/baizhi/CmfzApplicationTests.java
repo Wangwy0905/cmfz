@@ -1,8 +1,11 @@
 package com.baizhi;
 
 
-import com.baizhi.entity.Album;
+
+import com.baizhi.entity.Article;
 import com.baizhi.mapper.AlbumMapper;
+import com.baizhi.mapper.ArticleLuceneMapper;
+import com.baizhi.mapper.ArticleMapper;
 import com.baizhi.mapper.BannerMapper;
 import com.baizhi.service.AdminService;
 import com.baizhi.service.BannerService;
@@ -28,9 +31,13 @@ public class CmfzApplicationTests {
     BannerMapper bannerMapper;
     @Autowired
     AlbumMapper albumMapper;
+    @Autowired
+    ArticleMapper articleMapper;
+    @Autowired
+    ArticleLuceneMapper articleLuceneMapper;
 
    @Test
-    public void contextLoads1() {
+    public void test5() {
         System.out.println(bannerMapper.queryAllByPage(1,3));
     }
 
@@ -56,6 +63,19 @@ public class CmfzApplicationTests {
         System.out.println(s);
     }
 
+
+
+
+    @Test
+    public void  Test4(){
+        List<Article> list = articleMapper.queryAllArticle();
+        System.out.println(list+"1111111111111");
+        for (int i = 0; i <list.size(); i++) {
+            articleLuceneMapper.importIndex(list.get(i));
+        }
+    }
+
 }
+
 
 
