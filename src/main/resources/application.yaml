@@ -32,15 +32,7 @@ spring:
       max-active: 1000
       max-wait: -1
 mybatis:
-  type-aliases-package: com.baizhi.entity
+  type-aliases-package: com.stu.entity
   mapper-locations: classpath:Mapper/*Mapper.xml
-fdfs:
-  so-timeout: 1501
-  connect-timeout: 601
-  thumb-image:
-  width: 150
-  height: 150
-  tracker-list:
-    - 192.168.198.135:22122
 
 
