@@ -6,16 +6,13 @@ server:
       development: true
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cmfz
-
-  mvc:
-    view:
-      prefix: /
-      suffix: .jsp
+    password: wwy950905
+    url: jdbc:mysql://10.246.40.152:3306/cmfz?useSSL=false&serverTimezone=UTC
+    #数据库配置driver-class-name时，请注意，配置错误会导致引不到数据库
+    #mysql-connector-java是5.X  识别的是  com.mysql.jdbc.Driver
+    #如果你导入的是8.X 系列的   识别的就是 com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   http:
     encoding:
       charset: UTF-8
@@ -23,14 +20,14 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
-  redis:
-    host: 192.168.198.134
-    port: 7000
-    pool:
-      max-idle: 100
-      min-idle: 1
-      max-active: 1000
-      max-wait: -1
+#  redis:
+#    host: 192.168.198.134
+#    port: 7000
+#    pool:
+#      max-idle: 100
+#      min-idle: 1
+#      max-active: 1000
+#      max-wait: -1
 mybatis:
   type-aliases-package: com.stu.entity
   mapper-locations: classpath:Mapper/*Mapper.xml
