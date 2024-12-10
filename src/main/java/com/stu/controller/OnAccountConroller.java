@@ -36,6 +36,15 @@ public class OnAccountConroller {
         return onAccountService.queryAll();
     }
 
+    @GetMapping("test")
+    public Integer test() {
+        log.info("方法进来了.........");
+        Integer delete = onAccountService.delete();
+        System.out.println(delete);
+        return null;
+    }
+
+
 
     public static void main(String[] args) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");

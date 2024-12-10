@@ -12,7 +12,6 @@ public class NumberUtil {
         String num = format.format(number);
         return num;
     }
-
     /**
      * 生成四位序列号
      * @param number
@@ -28,5 +27,7 @@ public class NumberUtil {
         Double number=23.38;
         System.out.println(fillZero(number));
     }
+
+
 
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OnAccountService  {
     List<OnAccount> queryAll();
+
+    Integer delete();
 }

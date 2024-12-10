@@ -5,4 +5,8 @@
         select * from on_account;
     </select>
 
+    <delete id="delete">
+        delete from on_account where 1 = 1 limit 3
+    </delete>
+
 </mapper>

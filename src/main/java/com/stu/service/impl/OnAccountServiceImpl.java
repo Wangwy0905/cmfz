@@ -19,4 +19,11 @@ public class OnAccountServiceImpl implements OnAccountService {
         List<OnAccount> onAccounts = onAccountMapper.queryAll();
         return onAccounts;
     }
+
+    @Override
+    public Integer delete() {
+        return onAccountMapper.delete();
+    }
+
+
 }

@@ -1,14 +1,12 @@
 server:
   port: 8989
-  context-path: /cmfz
-  jsp-servlet:
-    init-parameters:
-      development: true
 spring:
   datasource:
     username: root
     password: wwy950905
-    url: jdbc:mysql://10.246.40.152:3306/cmfz?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/cmfz?useSSL=false&serverTimezone=UTC
+    ## url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncodeing=UTF-8&amp;useSSL=false&amp;serverTimezone=GMT
+
     #数据库配置driver-class-name时，请注意，配置错误会导致引不到数据库
     #mysql-connector-java是5.X  识别的是  com.mysql.jdbc.Driver
     #如果你导入的是8.X 系列的   识别的就是 com.mysql.cj.jdbc.Driver
